@@ -1,0 +1,83 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[slovene]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{units}
+\usepackage{eurosym}
+\usepackage{amsfonts}
+\usepackage{fancyhdr,amssymb,amsmath,amsthm,bbm,enumerate,mdwlist,url,multirow,hyperref,graphicx}
+\usepackage{pdfpages}
+\usepackage{comment}
+\usepackage{breqn}
+
+\usepackage{enumerate}
+\setlength{\parindent}{0mm}
+
+\DeclareUnicodeCharacter{2212}{-}
+
+\begin{document}
+\begin{titlepage}
+\begin{center}
+
+\large
+Univerza v Ljubljani\\
+\normalsize
+Fakulteta za matematiko in fiziko\\
+
+\vspace{5 cm} 
+
+\large
+Finančni praktikum \\
+
+
+\vspace{0.5cm}
+\LARGE
+\textbf{Lokalno iregularno barvanje povezav}
+
+\vspace{0.5 cm}
+
+\large
+Domen Flakus Bosilj in Lara Jagodnik \\
+
+
+\vspace{1.5cm}
+\normalsize
+Mentorja: prof. dr. Riste Škrekovski, asist. dr. Janoš Vidali
+\vspace{3cm}
+
+
+\vfill
+
+\large Ljubljana, 2019
+
+\end{center}
+\end{titlepage}
+
+
+\newpage
+
+\section{Kratka predstavitev}
+
+V projektu pri finančnem praktikumu si bova ogledala lokalno iregularno barvanje povezav. Pri obravnavi problema bova delala z neusmerjenimi grafi. Projekt bova izdelala v programu Sage. \\
+Graf $G$ je lokalno iregularen, če imata vsaki dve sosednji vozlišči $u$ in $v$ različno stopnjo, $deg(u) \neq deg(v)$. (Stopnja vozlišča nam pove število povezav, ki potekajo iz vozlišča.) \\
+Barvanje povezav je lokalno iregularno, če vsaka barva inducira lokalno iregularen graf. \\
+V projektu bova preverila ali drži domneva, da je vsak kubičen graf lokalno iregularno 3-obarvljiv. To pomeni, da lahko graf pobarvamo s tremi barvami tako, da razpade na tri lokalno iregularne grafe. (Kubični graf je graf v katerem imajo vsa vozlišča stopnjo 3.)\\
+
+Lastnosti grafov, ki so povezani z najino temo:
+\begin{itemize}
+
+\item Poti lihe dolžine ne dopuščajo lokalno iregularnega barvanja.
+\item Graf je ''decomposable'' če dopušča lokalno iregularno barvanje.
+\item Najmanjši $k$ za katerega obstaja lokalno iregularno barvanje v grafu $G$ s $k$ barvami se imenuje lokalni iregularni kromatični indeks in ga označimo z $x^'_{irr}(G)$
+\item Naj bo $G$ ''decomposable'' graf. Potem je $x^'_{irr}(G) \leq 328$.
+\item Domneva, da je $x^'_{irr}(G) \leq 3$ je že dokazana za posebne vrste grafov, kjer je najmanjša stopnja vozlišč vsaj $10^{10}$ in za $k$-regularne grafe, kjer je $k \geq 10^7$.
+
+\end{itemize}
+
+Problem bova najprej obravnavala na ''manjših'' grafih, ki jih bova generirala s pomočjo geng/nauty in jih vsakega posebej barvala. Nato bova konstruirala naključne ''velike'' kubične grafe, ki jih bova za začetek naključno barvala. Ker to najverjetneje ne bo zadostilo najinim pogojem, bova poskušala spremeniti barve, tako da dobiva lokalno iregularno barvanje povezav.
+
+
+
+\end{document}
