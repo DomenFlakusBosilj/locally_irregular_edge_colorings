@@ -1,0 +1,1 @@
+# locally_irregular_edge_colorings
