@@ -7,7 +7,7 @@ with open("seznam_protiprimerov.json") as f:
     neuspesni = json.load(f)
 
 for s in neuspesni:
-    G = Graph(s)
+    G = Graph(str(s), multiedges=False)
     print(G.order())
     graf = poskusi_pobarvat(G)
     if graf != None:
