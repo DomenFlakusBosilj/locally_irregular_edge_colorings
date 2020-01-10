@@ -3,7 +3,7 @@
 
 import json
 
-with open("seznam_protiprimerov.json") as f:
+with open("seznam_protiprimerov1.json") as f:
     neuspesni = json.load(f)
 
 for s in neuspesni:
