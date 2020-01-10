@@ -50,7 +50,7 @@ Mentorja: prof. dr. Riste Škrekovski, asist. dr. Janoš Vidali
 
 \vfill
 
-\large Ljubljana, 2019
+\large Ljubljana, 2020
 
 \end{center}
 \end{titlepage}
@@ -58,12 +58,13 @@ Mentorja: prof. dr. Riste Škrekovski, asist. dr. Janoš Vidali
 
 \newpage
 
-\section{Kratka predstavitev}
+\section{Uvod}
 
 V projektu pri finančnem praktikumu si bova ogledala lokalno iregularno barvanje povezav. Pri obravnavi problema bova delala z neusmerjenimi grafi. Projekt bova izdelala v programu Sage. \\
 Graf $G$ je lokalno iregularen, če imata vsaki dve sosednji vozlišči $u$ in $v$ različno stopnjo, $deg(u) \neq deg(v)$. (Stopnja vozlišča nam pove število povezav, ki potekajo iz vozlišča.) \\
 Barvanje povezav je lokalno iregularno, če vsaka barva inducira lokalno iregularen graf. \\
 V projektu bova preverila ali drži domneva, da je vsak kubičen graf lokalno iregularno 3-obarvljiv. To pomeni, da lahko graf pobarvamo s tremi barvami tako, da razpade na tri lokalno iregularne grafe. (Kubični graf je graf v katerem imajo vsa vozlišča stopnjo 3.)\\
+
 
 Lastnosti grafov, ki so povezani z najino temo:
 \begin{itemize}
@@ -76,7 +77,19 @@ Lastnosti grafov, ki so povezani z najino temo:
 
 \end{itemize}
 
-Problem bova najprej obravnavala na ''manjših'' grafih, ki jih bova generirala s pomočjo geng/nauty in jih vsakega posebej barvala. Nato bova konstruirala naključne ''velike'' kubične grafe, ki jih bova za začetek naključno barvala. Ker to najverjetneje ne bo zadostilo najinim pogojem, bova poskušala spremeniti barve, tako da dobiva lokalno iregularno barvanje povezav.
+
+\newpage
+\section{Kaj sva delala}
+
+Problem sva najprej obravnavala na ”manjših” graﬁh (do vključno 12 vozlišč), ki sva jih generirala s pomočjo funkcije graphs.nauty_geng. Ker pri tako majhnem številu vozlišč grafov še ni veliko, (kubičnih grafov na 10 vozliščij je 19, na 12 vozliščih pa 85) sva pregledala čisto vse možne. Grafe sva naključno pobarvala, nato sva poiskala povezave, kjer se pojavi težava. Barvanje sva spreminjala tako, da sva za vsako povezavo pogledala, ali sprememba barve te povezave morda zmanjša število povezav, ki ne ustrezajo pogoju lokalne iregularnosti grafa. V primeru izboljšanja sva barvanje spremenila, sicer je ostalo enako. Če po 3000 poskusih nisva uspela dobiti pravilnega barvanja, sva na najboljšem barvanju grafa, ki sva ga dobila izvedla še lokalno spreminjanje. Če je bila napaka na povezavi $uv$ sva pogledala, ali je možno kaj izboljšati na povezavah, ki imajo vsaj eno kajišče $u$ ali $v$. S tem sva uspela algoritem prcej izboljšati, saj se je glede na najine teste to izkazalo za najhitrejšo in najbolj učinkovito metodo. Za tem sva še enkrat poskusila z naključnim spreminjanjem barv, kjer je to mogoče. Če je bilo barvanje neuspešno, sva na istem grafu poskusila začeti z novim drugačnim barvanjem in v najslabšem primeru to ponovila 10-krat.
+
+Nato sva konstruirala naključne ”velike” kubične grafe z graphs.RandomRegular, na vozliščih 14, 16, 18, 20 in število vozlišč večala za 10 do 100. Tu nisva pregledala vseh možnih različnih grafov na določenem številu vozlišč ampak le naključnih 20. Popravljanje začetnega naključnega barvanja pa sva nadaljevala kot pri majhnih grafih.
+
+Grafe, ki jih najin algoritem ni uspel pobarvati tako, da bi ustrezali pogoju lokalne iregularnosti, sva shranila, saj le ti predstavljajo potencialen protiprimer, da domneva, ki sva jo preverjala, torej da je vse kubične grafe možno pobarvati s tremi barvami tako, sa so lokalno iregularni, ne drži.
+
+\newpage
+\section{Ugotovitve}
+Vse majhne grafe sva uspela lokalno iregularno pobarvati. Tudi z grafi na 14 vozliši ni bilo težav, saj je bil algoritem v vseh poskusih uspešen.
 
 
 
