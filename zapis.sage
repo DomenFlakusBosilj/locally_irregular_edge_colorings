@@ -9,4 +9,4 @@ seznam_protiprimerov = []
 for G in seznam_nepobarvanih:
     seznam_protiprimerov.append(G.sparse6_string())
 with open("seznam_protiprimerov.json", "w") as f:
-    json.dump(seznam_protiprimerov, f)
+    json.dump(seznam_protiprimerov, f, indent=2)
