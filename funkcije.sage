@@ -65,15 +65,88 @@ def popravljanje(kolikokrat, G):
                 #print 'spreminjam na B'
     return G
 
+def lokalno_popravljanje(G):
+    import random
+    for u, v, c in iskanje_slabih(G):
+        for u1, v1, c1 in G.edges_incident(u):
+            A = Graph(G)
+            B = Graph(G)
+            c = [1,2,3]
+            c.remove(G.edge_label(u1,v1))
+            barva1 = random.choice(c)
+            A.set_edge_label(u1, v1, barva1)
+            c.remove(barva1)
+            B.set_edge_label(u1, v1, c[0])
+            g = len(iskanje_slabih(G))
+            a = len(iskanje_slabih(A))
+            b = len(iskanje_slabih(B))
+            print iskanje_slabih(G)
+            print G.edges()
+            if a < b:
+                if a < g:
+                    G = Graph(A)
+                    print 'spreminjam na A'
+                    print G.edges()
+            else:
+                if b < g:
+                    G = Graph(B)
+                    print 'spreminjam na B'
+                    print G.edges()
+        for u1, v1, c1 in G.edges_incident(v):
+            A = Graph(G)
+            B = Graph(G)
+            a = len(iskanje_slabih(G))
+            c = [1,2,3]
+            c.remove(G.edge_label(u1,v1))
+            barva1 = random.choice(c)
+            A.set_edge_label(u1, v1, barva1)
+            c.remove(barva1)
+            B.set_edge_label(u1, v1, c[0])
+            g = len(iskanje_slabih(G))
+            a = len(iskanje_slabih(A))
+            b = len(iskanje_slabih(B))
+            print iskanje_slabih(G)
+            print G.edges()
+            if a < b:
+                if a < g:
+                    G = Graph(A)
+                    print 'spreminjam na A'
+                    print G.edges()
+            else:
+                if b < g:
+                    G = Graph(B)
+                    print 'spreminjam na B'
+                    print G.edges()
+    return G
+
 def poskusi_pobarvat(G, i=0):
     ind = 0
     while i < 10:
+        print('barva{}'.format(i))
         barvanje(G)
         G = Graph(popravljanje(3000, G))
         if iskanje_slabih(G) != []:
-            i += 1
+            print 'grem lokalno popravljat'
+            lokalno_popravljen = Graph(lokalno_popravljanje(G))
+            slabi_po_lokalnem = iskanje_slabih(lokalno_popravljen)
+            if (slabi_po_lokalnem != []) and (lokalno_popravljen.edges() != G.edges()):
+                print 'grem se enkrat popravljat'
+                G = Graph(popravljanje(3000, lokalno_popravljen))
+                if iskanje_slabih(G) != []:
+                    i += 1
+                else:
+                    print('uspelo pobarvat1')
+                    ind = 1
+                    break
+            elif (slabi_po_lokalnem != []) and (lokalno_popravljen.edges() == G.edges()):
+                i += 1
+            elif slabi_po_lokalnem == []:
+                print('uspelo pobarvat z lokalnim')
+                ind = 1
+                G = Graph(lokalno_popravljen)
+                break
         else:
-            print('uspelo pobarvat')
+            print('uspelo pobarvat3')
             ind = 1
             break
     if iskanje_slabih(G) != []:
@@ -81,7 +154,6 @@ def poskusi_pobarvat(G, i=0):
         return G
     else:
         if ind == 0:
-            print('uspelo pobarvat')
-
+            print('uspelo pobarvat4')
 
 seznam_nepobarvanih = []
