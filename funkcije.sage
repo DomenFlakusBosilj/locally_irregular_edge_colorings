@@ -80,18 +80,18 @@ def lokalno_popravljanje(G):
             g = len(iskanje_slabih(G))
             a = len(iskanje_slabih(A))
             b = len(iskanje_slabih(B))
-            print iskanje_slabih(G)
-            print G.edges()
+            iskanje_slabih(G)
+            #print G.edges()
             if a < b:
                 if a < g:
                     G = Graph(A)
                     print 'spreminjam na A'
-                    print G.edges()
+                    #print G.edges()
             else:
                 if b < g:
                     G = Graph(B)
                     print 'spreminjam na B'
-                    print G.edges()
+                    #print G.edges()
         for u1, v1, c1 in G.edges_incident(v):
             A = Graph(G)
             B = Graph(G)
@@ -105,33 +105,33 @@ def lokalno_popravljanje(G):
             g = len(iskanje_slabih(G))
             a = len(iskanje_slabih(A))
             b = len(iskanje_slabih(B))
-            print iskanje_slabih(G)
-            print G.edges()
+            iskanje_slabih(G)
+            #print G.edges()
             if a < b:
                 if a < g:
                     G = Graph(A)
                     print 'spreminjam na A'
-                    print G.edges()
+                    #print G.edges()
             else:
                 if b < g:
                     G = Graph(B)
                     print 'spreminjam na B'
-                    print G.edges()
+                    #print G.edges()
     return G
 
-def poskusi_pobarvat(G, i=0):
+def poskusi_pobarvat(G, i=0, n=3000):
     ind = 0
     while i < 10:
         print('barva{}'.format(i))
         barvanje(G)
-        G = Graph(popravljanje(3000, G))
+        G = Graph(popravljanje(n, G))
         if iskanje_slabih(G) != []:
             print 'grem lokalno popravljat'
             lokalno_popravljen = Graph(lokalno_popravljanje(G))
             slabi_po_lokalnem = iskanje_slabih(lokalno_popravljen)
             if (slabi_po_lokalnem != []) and (lokalno_popravljen.edges() != G.edges()):
                 print 'grem se enkrat popravljat'
-                G = Graph(popravljanje(3000, lokalno_popravljen))
+                G = Graph(popravljanje(n, lokalno_popravljen))
                 if iskanje_slabih(G) != []:
                     i += 1
                 else:
