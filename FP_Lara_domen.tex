@@ -5,13 +5,15 @@
 \usepackage{lmodern}
 \usepackage{amsmath}
 \usepackage{units}
-\usepackage{float}
 \usepackage{eurosym}
 \usepackage{amsfonts}
 \usepackage{fancyhdr,amssymb,amsmath,amsthm,bbm,enumerate,mdwlist,url,multirow,hyperref,graphicx}
 \usepackage{pdfpages}
 \usepackage{comment}
 \usepackage{breqn}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
 
 \usepackage{enumerate}
 \setlength{\parindent}{0mm}
@@ -86,36 +88,36 @@ Lastnosti grafov, ki so povezani z najino temo:
 \newpage
 \section{Kaj sva delala in kako dela algoritem}\textit{}\textit{}
 
-Problem sva najprej obravnavala na manjših graﬁh (do vključno 12 vozlišč), ki sva jih generirala s pomočjo funkcije graphs.nauty_geng. Ker pri tako majhnem številu vozlišč grafov še ni veliko, (kubičnih grafov na 10 vozliščij je 19, na 12 vozliščih pa 85) sva pregledala čisto vse možne.
+Problem sva najprej obravnavala na manjših graﬁh (do vključno 12 vozlišč), ki sva jih generirala s pomočjo funkcije graphs.nauty_geng. Ker pri tako majhnem številu vozlišč grafov še ni veliko, (kubičnih grafov na 10 vozliščih je 19, na 12 vozliščih pa 85) sva pregledala čisto vse možne.
 
 Grafe sva naključno pobarvala, nato sva poiskala povezave, kjer se pojavi težava. Najprej sva nameravala v vsakem obhodu funkcije čez vse povezave in ob tem pogledati ali se barvo splača spremeniti. Ker sva ugotovila da tak algoritem na velikih grafih deluje zelo počasi, sva funkcijo randomizirala. Barvanje sva nato spreminjala tako, da sva za naključno  povezavo pogledala, ali sprememba barve te povezave morda zmanjša število povezav, ki ne ustrezajo pogoju lokalne iregularnosti grafa. Če je bilo barvanje neuspešno, sva na istem grafu poskusila začeti z novim drugačnim barvanjem in v najslabšem primeru to ponovila 10-krat.
 
-
 \begin{figure}[H]
-\centering
-\begin{minipage}{.5\textwidth}
+\begin{minipage}{0.5\textwidth}
   \centering
-  \includegraphics[width=.8\linewidth]{petersen_pred.png}
-  \captionof{Naključno pobarvan Petersenov graf}
-  \label{fig:naključno pobarvan Petersenov graf}
+  \includegraphics[width=\linewidth]{petersen_pred.png}
+  \captionsetup{width=0.75\textwidth}
+  \caption{Naključno pobarvan $Petersenov$ $graf$}
+  \label{fig:Peterson1}
 \end{minipage}%
-\begin{minipage}{.5\textwidth}
+\begin{minipage}{0.5\textwidth}
   \centering
-  \includegraphics[width=.8\linewidth]{petersen_po.png}
-  \captionof{Lokalno iregularno pobarvan $Petersenov$ $graf$}
-  \label{fig:lokalno iregularno pobarvan $Petersenov$ $graf$}
+  \includegraphics[width=\linewidth]{petersen_po.png}
+  \captionsetup{width=0.72\textwidth}
+  \caption{Lokalno iregularno pobarvan $Petersenov$ $graf$}
+  \label{fig:Peterson2}
 \end{minipage}
 \end{figure}
 
-Za primer prikaza delovanja algoritma sva vzela najbolj znan kubičen graf na 10 vozliščih, to je $Petersenov$ $graf$. Na sliki 1 je prikazano naključno začetno barvanje, na sliki 2 pa koncno barvanje ki je lokalno iregularno.
+Za primer prikaza delovanja algoritma sva vzela najbolj znan kubičen graf na 10 vozliščih, to je $Petersenov$ $graf$. Na sliki \ref{fig:Peterson1} je prikazano naključno začetno barvanje, na sliki \ref{fig:Peterson2} pa koncno barvanje ki je lokalno iregularno.
 
-Nato sva konstruirala naključne ”velike” kubične grafe z graphs.RandomRegular, na vozliščih 14, 16, 18, 20 in število vozlišč večala za 10 do 70. Tu nisva pregledala vseh možnih različnih grafov na določenem številu vozlišč ampak le naključnih 10. Popravljanje začetnega naključnega barvanja pa sva nadaljevala kot pri majhnih grafih.
+Nato sva konstruirala naključne ”velike” kubične grafe z graphs.RandomRegular, na vozliščih 14, 16, 18, 20 in število vozlišč večala za 10 do 70. Tu nisva pregledala vseh možnih različnih grafov na določenem številu vozlišč ampak le naključnih 10. Popravljanje začetnega naključnega barvanja pa sva nadaljevala kot pri majhnih grafih. Ker je bil algoritem za grafe na 70 vozliščih precej počasen sva tu dobila le rezultate šestih grafov, kjer noben ni bil uspešno pobarvan.
 
 Grafe, ki jih najin algoritem ni uspel pobarvati tako, da bi ustrezali pogoju lokalne iregularnosti, sva shranila, saj le ti predstavljajo potencialen protiprimer, da domneva, ki sva jo preverjala, torej da je vse kubične grafe možno pobarvati s tremi barvami tako, da so lokalno iregularni, ne drži.
 
 \subsection{Ugotovitve po poganjanju}
 
-Vse majhne grafe sva uspela lokalno iregularno pobarvati. Tudi z grafi na 14 vozlišči ni bilo težav, saj je bil algoritem v vseh poskusih uspešen. Težave so se začele pojavljati pri grafih na 16 vozliščih, kjer najin algoritem ni uspel pobarvati nobenega od desetih slučajnih grafov. Prav tako barvanje ni uspelo na nobenem večjem grafu.
+Vse majhne grafe sva uspela lokalno iregularno pobarvati. Tudi z grafi na 14 vozlišči ni bilo težav, saj je bil algoritem v vseh poskusih uspešen. Težave so se začele pojavljati pri grafih na 16 vozliščih, kjer najin algoritem ni uspel pobarvati nobenega od desetih slučajnih grafov. Prav tako barvanje ni uspelo na nobenem večjem grafu. V seznamu nepravilno pobarvanih grafov sva tako imela 76
 
 
 \section{Prvo izboljšanje algoritma}
@@ -128,32 +130,63 @@ Ta funkcija je hitrejša in bolje deluje tudi na velikih grafih, kjer se je uspe
 
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{stevilo_nepravilnih.png}
-  \caption{Število nepravilno pobarvanih grafov}
-  \label{fig:število nepravilno pobarvanih grafov}
+  \caption{Število nepravilno pobarvanih grafov pred in po prvem izboljšanju algoritma}
+  \label{fig:stnepravilnih1}
 \end{figure}
 
-Slika 1 prikazuje število nepravilno pobarvanih grafov s funkcijo pred in po izboljšavah. Vidimo, da nobena od funkcij do 14 vozlišč ni imela težav, le-te pa so se začele pred izboljšavami pojavljati že pri 16 vozliščih, kjer algoritem ni znal pravilno pobarvati nobenega grafa. Izboljšana funkcija pa je bila v vseh primerih uspešna vse do 20 vozlišč in tudi na več vozliščih je bila veliko boljša od prejšnje.
+Slika \ref{fig:stnepravilnih1} prikazuje število nepravilno pobarvanih grafov s funkcijo pred in po prvi izboljšavi. Vidimo, da nobena od funkcij do 14 vozlišč ni imela težav, le-te pa so se začele pred izboljšavami pojavljati že pri 16 vozliščih, kjer algoritem ni znal pravilno pobarvati nobenega grafa. Izboljšana funkcija pa je bila v vseh primerih uspešna vse do 20 vozlišč in tudi na več vozliščih je bila veliko boljša od prejšnje.
 
-Prvi graf ki ga funkcija ni uspela pravilno pobarvati je bil na 30 vozliščih, zato sva ga dodala na seznam potencialnih protiprimerov, prikazan je na sliki 2. Potem je s številom vozlišč  število neuspešno pobarvanih grafov strmo narastlo, kar bi lahko pomenilo, da nekaj grafov ni mogoče lokalno iregularno pobarvati s 3 barvami, možno pa je tudi, da je to mogoče vendar bi potrebovali zelo veliko časa ali nekoliko boljši algoritem.
+Prvi graf ki ga funkcija ni uspela pravilno pobarvati je bil na 30 vozliščih, zato sva ga dodala na seznam potencialnih protiprimerov, prikazan je na sliki \ref{fig:30neuspel}. Graf je neuspešno pobarvan zaradi modre povezave $(15, 28)$, saj imata zaradi tega obe prej omenjeni vozlišči po 2 povezavi modre barve. Potem je s številom vozlišč  število neuspešno pobarvanih grafov strmo narastlo, kar bi lahko pomenilo, da nekaj grafov ni mogoče lokalno iregularno pobarvati s 3 barvami, možno pa je tudi, da je to mogoče vendar bi potrebovali zelo veliko časa ali nekoliko boljši algoritem. V seznamu neuspešno pobarvanih grafov je tako ostalo še 30 grafov.
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth]{30_proti.png}
-  \caption{Graf na 30 vozliščih, ki ga prvič izboljšana funkcija ni uspela pobarvati}
-  \label{fig:Graf na 30 vozliščih, ki ga izboljšana funkcija ni uspela pobarvati}
+  \includegraphics[width=\linewidth]{30neuspel_pobarvan.png}
+  \caption{Nepravilno pobarvan graf na 30 vozliščih, ki ga prvič izboljšana funkcija ni uspela pobarvati}
+  \label{fig:30neuspel}
 \end{figure}
 
 
 \section{Drugo izboljšanje funkcije}
 
-Funkcijo sva spremenila tako, da je število, korakov, namesto fiksnih 3000, odvisno od števila vozlišč v grafu. To sva uporabila le za velike grafe, saj se le tu še pojavljajo težave, število naključnih grafov, pa sva iz 10 zmanjšala na 5. Poleg tega sva s tako spremenjeno funkcijo poizkusila pravilno pobarvati še grafe, ki nama jih prej ni uspelo.
+Funkcijo sva spremenila tako, da je število, korakov, namesto fiksnih 3000, odvisno od števila vozlišč v grafu in sicer tako, da je število korakov enako produktu $100 * število$ $vozlišč$. To sva uporabila le za velike grafe, saj se le tu še pojavljajo težave, število naključnih grafov, pa sva iz 10 zmanjšala na 5. Poleg tega sva s tako spremenjeno funkcijo poizkusila pravilno pobarvati še grafe, ki nama jih prej ni uspelo.
 
 \subsection{Ugotovitve po drugem izboljšanju}
 
-S to funkcijo, sva uspela pravilno pobarvati vse grafe na vozliščih od 14 do 20. Težava se je pojavila pri grafu s 30 vozlišči, kjer eden od grafov ni bil uspešno pobarvan, je pa funkcija tokrat pravilno uspela pobarvati prejšnji graf na 30 vozličih, ki torej ne predstavlja potencialnega protiprimera.
+S tem algoritmom, sva uspela pravilno pobarvati vseh pet slučajnih grafov, ki jih je generiralo na vozliščih od 14 do 20. Težave so ze začele pojaviljati pri grafih s 30 vozlišči, kjer 3 od 5 grafov ni bilo uspešno pobarvanih. Presenetilo naju je, da so bili pravilno pobarvani štirje grafi na 40 vozliščih, kar je več kot število pravilno pobarvanih na 30 vozliščih. Funkcija je pravilno pobarvala še dva na 50 vozliščih, medtem ko pri nobenem grafu na 60 ali 70 vozliščih algoritem ni bil uspešen.
 
+Pri poganjanju funkcije na preostalih 30 grafih, ki še niso bili uspešno pobarvani, je funkcija tokrat pravilno uspela pobarvati prejšnji graf na 30 vozličih, ki torej ne predstavlja potencialnega protiprimera. Pravilno barvanje je prikazano na sliki \ref{fig:30uspesno}. Algoritem je bil uspešen še na 2 od 6 grafov na 40 vozliščih in 3 od 8 na 50 vozliščih. Na večjih grafih, je bil tudi tokrat algoritem neuspešen. V seznamu neuspešno pobarvanih grafov je tako ostalo še 24 grafov, najmanjši pa je na 40 vozliščih, eden od še vedno neuspešno pobarvanih grafov na 40 vozliščih je prikazan na sliki \ref{fig:40neuspel}, graf ima le eno napako in sicer na zeleni povezavi $(23, 30)$.
 
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{30uspel_pobarvan}
+  \caption{Pravilno pobarvan graf na 30 vozliščih}
+  \label{fig:30uspesno}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{40neuspel_pobarvan.png}
+  \caption{Graf na 40 vozliščih, ki ga funkcija ni uspela lokalno iregularno pobarvati}
+  \label{fig:40neuspel}
+\end{figure}
+
+Za največji graf sva na sliki \ref{fig:60neuspel} prikazala graf na 60 vozliščih, saj za graf na 70 vozliščih nisva uspela dobiti grafa, kjer bi bile napake dovolj razvidne. Od 20 grafov, ki sva jih generirala in poskusila pravilno pobarvati je najin algoritem število napak v najboljšem primeru uspel zmanjšati na 2 napaki. Napaki sta ostali na povezavi $(28, 57)$, kjer imata obe vozlišči po dve rdeči povezavi, in na povezavi $(21, 35)$, kjer imata obe vozlišči po dve zeleni povezavi.
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{60neuspel.png}
+  \caption{Graf na 60 vozliščih, ki ga funkcija ni uspela lokalno iregularno pobarvati}
+  \label{fig:60neuspel}
+\end{figure}
+
+\newpage
 \section{Zaključek}
-Algoritem, ki sva ga napisala je za manjše grafe precej uspešen, za grafe na vozliščih od 30 naprej pa deluje nekoliko slabše. Njegova uspešnost je po najinih ugotovitvah precej odvisna od začetnega naključnega barvanja grafa. Zdi se nama, da bi ob z zadostnim številom poskusov barvanja grafov uspeli pobarvati večino na 30 vozliščih, kasneje pa se res lahko pojavijo težavem kot kažejo najini potencialni protiprimeri, ki jih je na grafih z veliko vozlišči kar precej.
+Algoritem, ki sva ga napisala je za manjše grafe precej uspešen, za grafe na vozliščih od 30 naprej pa deluje nekoliko slabše. Kot prikazuje slika \ref{fig:nepravilni_konec} je bil začetni algoritem skoraj neuspešen, uspešnost po prvem in drugem popravljanju pa je bila precej podobna, s presenetljivim odstopanjem za grafe na 40 vozliščih. Za grafe na 70 vozliščih noben algoritem ni bil uspešen.
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{stevilo_nepravilnih_3_poganjanja.png}
+  \caption{Število nepravilno pobarvanih grafov po treh poganjanjih}
+  \label{fig:nepravilni_konec}
+\end{figure}
+
+
+Po najinih ugotovitvah njegova uspešnost ni veliko odvisna od števila začetnih korakov, kolikokrat funkcija naključno izbere povezavo in jo poizkusi spremeniti, če je le to število dovolj veliko. Je pa precej odvisna od začetnega naključnega barvanja grafa. Ko sva povečala število možnih začetnih naključnih barvanj, se je namreč tudi uspešnost pravilnega barvanja povečala. Zdi se nama, da bi z zadostnim številom poskusov barvanja grafov uspeli pobarvati večino na 30, 40 in 50 vozliščih, kasneje pa se res lahko pojavijo težave, kot kažejo najini potencialni protiprimeri, ki jih je na grafih z veliko vozlišči ostalo kar precej.
 
 
 
