@@ -109,7 +109,7 @@ Grafe sva naključno pobarvala, nato sva poiskala povezave, kjer se pojavi teža
 \end{minipage}
 \end{figure}
 
-Za primer prikaza delovanja algoritma sva vzela najbolj znan kubičen graf na 10 vozliščih, to je $Petersenov$ $graf$. Na sliki \ref{fig:Peterson1} je prikazano naključno začetno barvanje, na sliki \ref{fig:Peterson2} pa koncno barvanje ki je lokalno iregularno.
+Za primer prikaza delovanja algoritma sva vzela najbolj znan kubičen graf na 10 vozliščih, to je $Petersenov$ $graf$. Na sliki \ref{fig:Peterson1} je prikazano naključno začetno barvanje, na sliki \ref{fig:Peterson2} pa končno barvanje, ki je lokalno iregularno s tremi barvami.
 
 Nato sva konstruirala naključne ”velike” kubične grafe z graphs.RandomRegular, na vozliščih 14, 16, 18, 20 in število vozlišč večala za 10 do 70. Tu nisva pregledala vseh možnih različnih grafov na določenem številu vozlišč ampak le naključnih 10. Popravljanje začetnega naključnega barvanja pa sva nadaljevala kot pri majhnih grafih. Ker je bil algoritem za grafe na 70 vozliščih precej počasen sva tu dobila le rezultate šestih grafov, kjer noben ni bil uspešno pobarvan.
 
@@ -117,12 +117,12 @@ Grafe, ki jih najin algoritem ni uspel pobarvati tako, da bi ustrezali pogoju lo
 
 \subsection{Ugotovitve po poganjanju}
 
-Vse majhne grafe sva uspela lokalno iregularno pobarvati. Tudi z grafi na 14 vozlišči ni bilo težav, saj je bil algoritem v vseh poskusih uspešen. Težave so se začele pojavljati pri grafih na 16 vozliščih, kjer najin algoritem ni uspel pobarvati nobenega od desetih slučajnih grafov. Prav tako barvanje ni uspelo na nobenem večjem grafu. V seznamu nepravilno pobarvanih grafov sva tako imela 76
+Vse majhne grafe sva uspela lokalno iregularno pobarvati. Tudi z grafi na 14 vozlišči ni bilo težav, saj je bil algoritem v vseh poskusih uspešen. Težave so se začele pojavljati pri grafih na 16 vozliščih, kjer najin algoritem ni uspel pobarvati nobenega od desetih slučajnih grafov. Prav tako barvanje ni uspelo na nobenem večjem grafu. V seznamu nepravilno pobarvanih grafov sva jih tako imela 76.
 
 
 \section{Prvo izboljšanje algoritma}
 
-Začetek funkcije sva ohranila in dodala izboljšave. Če po 3000 poskusih nisva uspela dobiti pravilnega barvanja, sva na najboljšem barvanju grafa, ki sva ga dobila izvedla še lokalno spreminjanje. Če je bila napaka na povezavi $uv$ sva pogledala, ali je možno kaj izboljšati na povezavah, ki imajo vsaj eno kajišče $u$ ali $v$. S tem sva uspela algoritem prcej izboljšati, saj se je glede na najine teste to izkazalo za najhitrejšo in najbolj učinkovito metodo. Če je funkcija lokalno_sprmeinjanje graf izboljšala, ni pa uspela odpraviti vseh težav, sva še enkrat poskusila z naključnim spreminjanjem barv, kjer je to mogoče.
+Začetek funkcije sva ohranila in dodala izboljšave. Če po 3000 poskusih nisva uspela dobiti pravilnega barvanja, sva na najboljšem barvanju grafa, ki sva ga dobila izvedla še lokalno spreminjanje. Če je bila napaka na povezavi $uv$ sva pogledala, ali je možno kaj izboljšati na povezavah, ki imajo vsaj eno krajišče $u$ ali $v$. S tem sva uspela algoritem precej izboljšati, saj se je glede na najine teste to izkazalo za najhitrejšo in najbolj učinkovito metodo. Če je funkcija lokalno_spreminjanje graf izboljšala, ni pa uspela odpraviti vseh težav, sva še enkrat poskusila z naključnim spreminjanjem barv, kjer je to mogoče.
 
 \subsection{Ugotovitve po prvem izboljšanju}
 
@@ -130,7 +130,7 @@ Ta funkcija je hitrejša in bolje deluje tudi na velikih grafih, kjer se je uspe
 
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{stevilo_nepravilnih.png}
-  \caption{Število nepravilno pobarvanih grafov pred in po prvem izboljšanju algoritma}
+  \caption{Delež nepravilno pobarvanih grafov pred in po prvem izboljšanju algoritma}
   \label{fig:stnepravilnih1}
 \end{figure}
 
@@ -181,7 +181,7 @@ Algoritem, ki sva ga napisala je za manjše grafe precej uspešen, za grafe na v
 
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{stevilo_nepravilnih_3_poganjanja.png}
-  \caption{Število nepravilno pobarvanih grafov po treh poganjanjih}
+  \caption{Delež nepravilno pobarvanih grafov po dveh izboljšavah}
   \label{fig:nepravilni_konec}
 \end{figure}
 
